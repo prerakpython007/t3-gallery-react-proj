@@ -2,6 +2,8 @@ import { index } from "drizzle-orm/mysql-core";
 import Link from "next/link";
 import { db } from "~/server/db";
 
+export const dynamic = "force-dynamic"
+
 const mockUrls = [
   "https://thumbs.dreamstime.com/b/chain-links-shown-sky-blue-background-made-up-many-small-frozen-time-concept-mystery-wonder-324071465.jpg",
   "https://thumbs.dreamstime.com/b/swilcan-bridge-swilken-famous-small-stone-spanning-burn-st-andrews-links-golf-course-scotland-united-kingdom-216727869.jpg",
