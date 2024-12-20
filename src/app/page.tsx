@@ -1,10 +1,9 @@
+import { unstable_noStore as noStore } from 'next/cache';  // Add this import
 import { index } from "drizzle-orm/mysql-core";
 import Link from "next/link";
 import { db } from "~/server/db";
 
-// These two are enough to force dynamic behavior
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 const mockUrls = [
   "https://thumbs.dreamstime.com/b/chain-links-shown-sky-blue-background-made-up-many-small-frozen-time-concept-mystery-wonder-324071465.jpg",
@@ -19,8 +18,16 @@ const mockImages = mockUrls.map((url , index) => ({
 }))
 
 export default async function HomePage() {
-  const posts = await db.query.posts.findMany();
-  console.log(posts);
+  // Add this line to prevent caching
+  noStore();
+  
+  // Add a random query parameter to prevent caching
+  const posts = await db.query.posts.findMany({
+    // Add orderBy to ensure latest data
+    orderBy: (posts, { desc }) => [desc(posts.id)]
+  });
+  
+  console.log("Fresh data fetched:", posts);
 
   const duplicatedImages = [
     ...mockImages.map(img => ({ ...img, id: img.id })),
@@ -30,14 +37,16 @@ export default async function HomePage() {
   return (
     <main className="">
       <div className="flex flex-wrap gap-4">
-        {posts.map((post)=> (<div key={post.id}>{post.name}</div>))}
-        {
-          duplicatedImages.map((image , index) => (
-            <div key={image.id + "-"  + index} className="w-48 p-3">
-                <img src={image.url} alt="" />
-            </div>
-          ))
-        }
+        {posts.map((post)=> (
+          <div key={post.id} className="p-2 border rounded">
+            {post.name} - ID: {post.id}
+          </div>
+        ))}
+        {duplicatedImages.map((image , index) => (
+          <div key={image.id + "-"  + index} className="w-48 p-3">
+              <img src={image.url} alt="" />
+          </div>
+        ))}
       </div>
     </main>
   );
