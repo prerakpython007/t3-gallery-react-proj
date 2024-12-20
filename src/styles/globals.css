@@ -4,5 +4,5 @@
 
 
 body {
-    @apply bg-black text-white
+    @apply bg-yellow-100 text-black
 }
