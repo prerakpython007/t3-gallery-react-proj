@@ -1,9 +1,12 @@
-import { unstable_noStore as noStore } from 'next/cache';  // Add this import
+import { unstable_noStore as noStore } from 'next/cache';
 import { index } from "drizzle-orm/mysql-core";
 import Link from "next/link";
 import { db } from "~/server/db";
 
-export const dynamic = "force-dynamic";
+// Opt out of all caching
+export const fetchCache = 'force-no-store';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const mockUrls = [
   "https://thumbs.dreamstime.com/b/chain-links-shown-sky-blue-background-made-up-many-small-frozen-time-concept-mystery-wonder-324071465.jpg",
@@ -17,17 +20,20 @@ const mockImages = mockUrls.map((url , index) => ({
   url,
 }))
 
-export default async function HomePage() {
-  // Add this line to prevent caching
+async function getData() {
   noStore();
-  
-  // Add a random query parameter to prevent caching
-  const posts = await db.query.posts.findMany({
-    // Add orderBy to ensure latest data
+  return await db.query.posts.findMany({
     orderBy: (posts, { desc }) => [desc(posts.id)]
   });
+}
+
+export default async function HomePage() {
+  noStore();
+  const posts = await getData();
   
-  console.log("Fresh data fetched:", posts);
+  // Add a timestamp to verify fresh data
+  const timestamp = new Date().toISOString();
+  console.log("Data fetched at:", timestamp, posts);
 
   const duplicatedImages = [
     ...mockImages.map(img => ({ ...img, id: img.id })),
@@ -36,6 +42,10 @@ export default async function HomePage() {
   
   return (
     <main className="">
+      {/* Add timestamp to visually verify refresh */}
+      <div className="text-sm text-gray-500 mb-4">
+        Last fetched: {timestamp}
+      </div>
       <div className="flex flex-wrap gap-4">
         {posts.map((post)=> (
           <div key={post.id} className="p-2 border rounded">

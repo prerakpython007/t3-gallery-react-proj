@@ -14,3 +14,8 @@
 - [ ] delete button (w/ server actions)
 - [ ] Analytics (posthog)
 - [ ] Ratelimiting (upstash)
+
+
+
+#bugs
+- [ ] The page is getting cached 
