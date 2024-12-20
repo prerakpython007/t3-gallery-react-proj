@@ -1,5 +1,6 @@
 import { index } from "drizzle-orm/mysql-core";
 import Link from "next/link";
+import { db } from "~/server/db";
 
 const mockUrls = [
   "https://thumbs.dreamstime.com/b/chain-links-shown-sky-blue-background-made-up-many-small-frozen-time-concept-mystery-wonder-324071465.jpg",
@@ -13,7 +14,10 @@ const mockImages = mockUrls.map((url , index) => ({
   url,
 }))
 
-export default function HomePage() {
+export default async function HomePage() {
+
+  const posts = await db.query.posts.findMany()
+  console.log(posts)
 
   const duplicatedImages = [
     ...mockImages.map(img => ({ ...img, id: img.id })),
@@ -21,9 +25,11 @@ export default function HomePage() {
   ];
   return (
     <main className="">
-      <div className="flex flex-wrap gap-4">{
-      duplicatedImages.map((image) => (
-        <div key={image.id} className="w-48 p-3">
+      <div className="flex flex-wrap gap-4">
+        {posts.map((post)=> (<div key={post.id}>{post.name}</div>))}
+        {
+      duplicatedImages.map((image , index) => (
+        <div key={image.id + "-"  + index} className="w-48 p-3">
             <img src={image.url} alt="" />
         </div>
       ))
