@@ -5,7 +5,7 @@
 - [x] Make it deploy (vercel)
 - [x] Scaffold basic ui with mock data
 - [x] tidy up the build process
-- [ ] Actually setup a data base ( vercel with postgres)
+- [x] Actually setup a data base ( vercel with postgres)
 - [ ] Connect database to ui
 - [ ] Add Authentication ( w/ clerk)
 - [ ] Add image upload 
@@ -18,4 +18,4 @@
 
 
 #bugs
-- [ ] The page is getting cached 
+- [x] The page is getting cached 

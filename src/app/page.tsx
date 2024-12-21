@@ -4,35 +4,28 @@
 
   export const dynamic = "force-dynamic"
 
-  const mockUrls = [
-    "https://thumbs.dreamstime.com/b/chain-links-shown-sky-blue-background-made-up-many-small-frozen-time-concept-mystery-wonder-324071465.jpg",
-    "https://thumbs.dreamstime.com/b/swilcan-bridge-swilken-famous-small-stone-spanning-burn-st-andrews-links-golf-course-scotland-united-kingdom-216727869.jpg",
-    "https://thumbs.dreamstime.com/b/chain-links-shown-blue-orange-color-scheme-made-up-many-small-connected-to-each-other-pattern-323799637.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMtET81cbaBplH2R8Iox6Pcd7VqbPUJJTJGw&s",
-  ]
-
-  const mockImages = mockUrls.map((url , index) => ({
-    id : index + 1,
-    url,
-  }))
+ 
 
   export default async function HomePage() {
 
-    const posts = await db.query.posts.findMany()
-    console.log(posts)
+    const images = await db.query.images.findMany({
+      orderBy:(model, {desc}) => desc(model.id),
+    })
+    
 
     const duplicatedImages = [
-      ...mockImages.map(img => ({ ...img, id: img.id })),
-      ...mockImages.map(img => ({ ...img, id: img.id + mockImages.length }))
+      ...images.map(img => ({ ...img, id: img.id })),
+      ...images.map(img => ({ ...img, id: img.id + images.length }))
     ];
     return (
       <main className="">
         <div className="flex flex-wrap gap-4">
-          {posts.map((post)=> (<div key={post.id}>{post.name}</div>))}
+          
           {
         duplicatedImages.map((image , index) => (
-          <div key={image.id + "-"  + index} className="w-48 p-3">
+          <div key={image.id + "-"  + index} className="w-48 p-3 flex flex-col">
               <img src={image.url} alt="" />
+              <div>{image.name}</div>
           </div>
         ))
       }
