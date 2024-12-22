@@ -40,11 +40,11 @@ export default async function HomePage() {
   return (
     <main className="">
       <SignedOut>
-        <div className="h-full w-full text-2xl ">
-          <h1 className={`${lilita.className} text-5xl mt-[12%] text-center `}>Welcome to uploadThing! ❤️🔼</h1>
+        <div className="h-full  w-full text-2xl ">
+          <h1 className={`${lilita.className}  lg:text-5xl text-4xl lg:mt-[12%] mt-[40%] text-center `}>Welcome to uploadThing! ❤️🔼</h1>
           <p className="text-2xl mt-6 text-center">Please Sign in!</p>
           <SignInButton>
-            <button className="bg-[#F0BB78] p-1 ml-[46.5%] mt-4 rounded-md hover:shadow-2xl cursor-pointer duration-300 border-[#543A14] border-[4px]">
+            <button className="bg-[#F0BB78] p-1 ml-[40%] lg:ml-[46.5%] mt-4 rounded-md hover:shadow-2xl cursor-pointer duration-300 border-[#543A14] border-[4px]">
               Sign In
             </button>
           </SignInButton>
