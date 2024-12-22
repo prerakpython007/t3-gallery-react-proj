@@ -16,7 +16,15 @@ export function TopNav() {
           </SignInButton>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+        <UserButton
+  appearance={{
+    elements: {
+      avatarBox: "w-8 h-8",  // Controls avatar size
+      userButtonBox: "hover:bg-[#F0BB78] duration-300 rounded-full p-1", // Controls button container
+      userButtonTrigger: "focus:outline-none focus:ring-2 focus:ring-[#F7D9C8]", // Button focus states
+    },
+  }}
+/>
         </SignedIn>
       </div>
     </nav>
