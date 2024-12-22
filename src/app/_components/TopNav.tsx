@@ -1,10 +1,17 @@
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import { Lilita_One } from 'next/font/google'
+
+const lilita = Lilita_One({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export function TopNav() {
   return (
     <nav className="flex justify-between items-center p-4 border-b border-black text-xl font-semibold">
-      <div className="bg-[#F0BB78] p-1 rounded-md hover:shadow-2xl cursor-pointer duration-300 border-[#543A14] border-[4px]">
-        Gallery
+      <div className=" p-1 rounded-md  cursor-default border-opacity-45 border-[#543A14] border-[4px]">
+        <h1 className={`${lilita.className}`}>UploadThing</h1>
       </div>
 
       <div>

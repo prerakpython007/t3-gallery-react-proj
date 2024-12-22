@@ -8,6 +8,7 @@
 - [x] Actually setup a data base ( vercel with postgres)
 - [x] Connect database to ui
 - [x] Add Authentication ( w/ clerk)
+- [ ] make a good dashboard
 - [ ] Add image upload 
 - [ ] "taint" (server-only)
 - [ ] Error management (w/ sentry)

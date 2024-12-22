@@ -1,35 +1,59 @@
-  import { index } from "drizzle-orm/mysql-core";
-  import Link from "next/link";
-  import { db } from "~/server/db";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
+import { db } from "~/server/db";
+import { Lilita_One } from 'next/font/google'
 
-  export const dynamic = "force-dynamic"
+const lilita = Lilita_One({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
- 
+export const dynamic = "force-dynamic";
 
-  export default async function HomePage() {
+// Separate async component for images
+async function Images() {
+  const images = await db.query.images.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
 
-    const images = await db.query.images.findMany({
-      orderBy:(model, {desc}) => desc(model.id),
-    })
-    
+  // Create duplicated images array inside the component
+  const duplicatedImages = [
+    ...images.map(img => ({ ...img, id: img.id })),
+    ...images.map(img => ({ ...img, id: img.id + images.length }))
+  ];
 
-    const duplicatedImages = [
-      ...images.map(img => ({ ...img, id: img.id })),
-      ...images.map(img => ({ ...img, id: img.id + images.length }))
-    ];
-    return (
-      <main className="">
-        <div className="flex flex-wrap gap-4">
-          
-          {
-        duplicatedImages.map((image , index) => (
-          <div key={image.id + "-"  + index} className="w-48 p-3 flex flex-col">
-              <img src={image.url} alt="" />
-              <div>{image.name}</div>
-          </div>
-        ))
-      }
+  return (
+    <div className="flex flex-wrap gap-4">
+      {duplicatedImages.map((image, index) => (
+        <div key={image.id + "-" + index} className="w-48 p-3 flex flex-col">
+          <img src={image.url} alt={image.name ?? ""} />
+          <div>{image.name}</div>
         </div>
-      </main>
-    );
-  }
+      ))}
+    </div>
+  );
+}
+
+// Main page component
+export default async function HomePage() {
+  return (
+    <main className="">
+      <SignedOut>
+        <div className="h-full w-full text-2xl ">
+          <h1 className={`${lilita.className} text-5xl mt-[12%] text-center `}>Welcome to uploadThing! ❤️🔼</h1>
+          <p className="text-2xl mt-6 text-center">Please Sign in!</p>
+          <SignInButton>
+            <button className="bg-[#F0BB78] p-1 ml-[46.5%] mt-4 rounded-md hover:shadow-2xl cursor-pointer duration-300 border-[#543A14] border-[4px]">
+              Sign In
+            </button>
+          </SignInButton>
+        </div>
+      </SignedOut>
+      <SignedIn>
+        {/* Use proper JSX syntax for async components */}
+        <Images />
+      </SignedIn>
+    </main>
+  );
+}
