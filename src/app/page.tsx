@@ -18,14 +18,10 @@ async function Images() {
   });
 
   // Create duplicated images array inside the component
-  const duplicatedImages = [
-    ...images.map(img => ({ ...img, id: img.id })),
-    ...images.map(img => ({ ...img, id: img.id + images.length }))
-  ];
-
+  
   return (
     <div className="flex flex-wrap gap-4">
-      {duplicatedImages.map((image, index) => (
+      {images.map((image, index) => (
         <div key={image.id + "-" + index} className="w-48 p-3 flex flex-col">
           <img src={image.url} alt={image.name ?? ""} />
           <div>{image.name}</div>
