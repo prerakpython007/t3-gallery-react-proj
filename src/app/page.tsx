@@ -57,7 +57,7 @@ export default async function HomePage() {
           <p className="text-2xl mt-6 text-center">Your Story, Your Gallery</p>
           <p className="text-2xl mt-2 text-center">Please Sign in!</p>
           <SignInButton>
-            <button className=" flex  ml-[38%] lg:ml-[45.5%] mt-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg  dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+            <button className=" flex  ml-[39%] lg:ml-[46%] mt-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg  dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
               Sign In <UserRoundPlus className="ml-2" size={20} />
             </button>
           </SignInButton>

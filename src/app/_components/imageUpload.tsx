@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Upload } from 'lucide-react';
 
 export function ImageUpload() {
   const [loading, setLoading] = useState(false);
@@ -37,14 +38,18 @@ export function ImageUpload() {
 
   return (
     <div className='flex flex-row-reverse'>
-      <input
-        type="file"
-        onChange={handleUpload}
-        disabled={loading}
-        accept="image/*"
-        multiple
-        className="block w-full  text-sm file:duration-300  file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#dde1fd] file:text-[#131010]  file:hover:text-white file:cursor-pointer hover:file:bg-[#AF47D2]"
-      />
+      <label className="cursor-pointer flex items-center gap-2  text-[#131010] hover:bg-[#AF47D2] hover:text-white p-2 rounded-full transition-colors duration-300">
+        <Upload className='text-[#dde1fd]' size={30} />
+        
+        <input
+          type="file"
+          onChange={handleUpload}
+          disabled={loading}
+          accept="image/*"
+          multiple
+          className="hidden"
+        />
+      </label>
       {loading && <span className="text-sm mt-2 mr-4">Uploading...</span>}
     </div>
   );
