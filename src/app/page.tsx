@@ -5,6 +5,7 @@ import { db } from "~/server/db";
 import { Lilita_One } from 'next/font/google'
 import { Home, User, Settings, UserRoundPlus } from "lucide-react";
 import { getMyImages } from "~/server/queries";
+import Image from "next/image";
 
 
 
@@ -28,9 +29,12 @@ async function Images() {
           key={image.id} 
           className="w-48 p-3 flex flex-col bg-white   hover:shadow-lg transition-shadow duration-300"
         >
-          <img 
+          <Image
             src={image.url} 
             alt={image.name ?? ""} 
+            style={{objectFit: 'contain'}}
+            width={190}
+            height={190}
             className="w-full h-40 object-cover rounded-md"
           />
           <div className="mt-2 text-center break-words font-medium text-gray-700">

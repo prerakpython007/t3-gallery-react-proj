@@ -6,6 +6,11 @@ import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
 const config = {
+    images:{
+        remotePatterns: [
+            {hostname: "5nrgwkug8b9ckgoo.public.blob.vercel-storage.com"}
+        ]
+    },
     typescript:{
         ignoreBuildErrors: true,
     },
