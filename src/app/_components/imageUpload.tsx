@@ -43,7 +43,7 @@ export function ImageUpload() {
         disabled={loading}
         accept="image/*"
         multiple
-        className="block w-full  text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#F0BB78] file:text-[#131010] hover:file:bg-[#fbd6a5]"
+        className="block w-full  text-sm file:duration-300  file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#dde1fd] file:text-[#131010]  file:hover:text-white file:cursor-pointer hover:file:bg-[#AF47D2]"
       />
       {loading && <span className="text-sm mt-2 mr-4">Uploading...</span>}
     </div>

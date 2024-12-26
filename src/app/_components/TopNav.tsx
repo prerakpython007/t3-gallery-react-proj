@@ -19,17 +19,17 @@ export function TopNav() {
     const [uploading, setUploading] = useState(false);
 
     return (
-        <nav className="flex justify-between items-center p-4 border-b border-black text-xl font-semibold">
-            <div className="p-1 rounded-md cursor-default border-opacity-45 border-[#543A14] border-[4px]">
+        <nav className="flex justify-between items-center p-4 border-b border-[#FF8F00] text-xl font-semibold">
+            <div className="p-1 rounded-md cursor-default bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700  border-[#FF8F00] border-[2px]">
                 <h1 className={`${lilita.className}`}>UploadThing</h1>
             </div>
 
             <div className="flex flex-row gap-4 items-center">
                 <SignedOut>
                     <SignInButton>
-                        <button className="bg-[#F0BB78] p-1 rounded-md hover:shadow-2xl cursor-pointer duration-300 border-[#543A14] border-[4px]">
-                            Sign In
-                        </button>
+                    <button className="  text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg  dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                        Sign In 
+                    </button>
                     </SignInButton>
                 </SignedOut>
                 <SignedIn>
@@ -38,8 +38,8 @@ export function TopNav() {
                         appearance={{
                             elements: {
                                 avatarBox: "w-10 h-10",
-                                userButtonBox: "hover:bg-[#F0BB78] duration-300 rounded-full p-1",
-                                userButtonTrigger: "focus:outline-none focus:ring-2 focus:ring-[#F7D9C8]",
+                                userButtonBox: "hover:bg-[#FF8F00] duration-300 rounded-full p-1",
+                                userButtonTrigger: "focus:outline-none focus:ring-2 focus:ring-[#AF47D2]",
                             },
                         }}
                     />
