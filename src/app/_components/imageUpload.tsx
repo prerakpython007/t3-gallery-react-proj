@@ -1,28 +1,33 @@
 // _components/ImageUpload.tsx
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function ImageUpload() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files?.[0]) return;
+    if (!e.target.files?.length) return;
     setLoading(true);
-    const file = e.target.files[0];
     
     try {
-      const response = await fetch(`/api/upload?filename=${file.name}`, {
-        method: 'POST',
-        body: file,
+      const files = Array.from(e.target.files);
+      const uploadPromises = files.map(async (file) => {
+        const response = await fetch(`/api/upload?filename=${file.name}`, {
+          method: 'POST',
+          body: file,
+        });
+        
+        if (!response.ok) throw new Error('Upload failed');
+        return response.json();
       });
       
-      if (!response.ok) throw new Error('Upload failed');
-      const blob = await response.json();
-      console.log('Upload successful:', blob.url);
+      const results = await Promise.all(uploadPromises);
+      console.log('Upload successful:', results);
       router.refresh();
+      router.push(''); // This f
     } catch (error) {
       console.error('Upload error:', error);
     } finally {
@@ -31,14 +36,19 @@ export function ImageUpload() {
   }
 
   return (
-    <div className="p-4">
+    <div className='flex flex-row-reverse'>
       <input
         type="file"
         onChange={handleUpload}
         disabled={loading}
         accept="image/*"
-        className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+        multiple
+        className="block w-full  text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#F0BB78] file:text-[#131010] hover:file:bg-[#fbd6a5]"
       />
+      {loading && <span className="text-sm mt-2 mr-4">Uploading...</span>}
     </div>
   );
 }
+
+
+// 
