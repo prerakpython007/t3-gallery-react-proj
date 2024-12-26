@@ -9,7 +9,7 @@
 - [x] Connect database to ui
 - [x] Add Authentication ( w/ clerk)
 - [x] make a good dashboard
-- [ ] Add image upload 
+- [x] Add image upload 
 - [ ] "taint" (server-only)
 - [ ] use next/image component
 - [ ] Error management (w/ sentry)
