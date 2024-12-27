@@ -23,26 +23,30 @@ async function Images() {
   const images = await getMyImages();
 
   return (
-    <div className="flex bg-[#1d0938]  flex-wrap gap-4 justify-center p-4">
-      {images.map((image) => (
-        <div 
-          key={image.id} 
-          className="w-48 p-3 flex flex-col bg-white   hover:shadow-lg transition-shadow duration-300"
-        >
-          <Image
-            src={image.url} 
-            alt={image.name ?? ""} 
-            style={{objectFit: 'contain'}}
-            width={190}
-            height={190}
-            className="w-full h-40 object-cover rounded-md"
-          />
-          <div className="mt-2 text-center break-words font-medium text-gray-700">
-            {image.name}
-          </div>
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 bg-[#1d0938] p-8">
+  {images.map((image) => (
+    <div 
+      key={image.id} 
+      className="group w-full bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300 hover:bg-white/10"
+    >
+      <div className="relative aspect-square">
+        <Image
+          src={image.url} 
+          alt={image.name ?? ""} 
+          width={190}
+          height={190}
+          style={{objectFit: "contain"}}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+      <div className="p-3 border-t border-[#AF47D2]/10">
+        <div className="text-sm font-medium text-white/90 truncate">
+          {image.name}
         </div>
-      ))}
+      </div>
     </div>
+  ))}
+</div>
   );
 }
 
