@@ -29,7 +29,8 @@ export async function Images() {
   const images = await getMyImages();
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-2  mt-16 md:grid-cols-3  lg:grid-cols-5 gap-8 bg-[#1d0938] p-8">
+    <div className="bg-[#1d0938] h-screen ">
+    <div className="grid grid-cols-2 sm:grid-cols-2   mt-16 md:grid-cols-3  lg:grid-cols-5 gap-8  p-8">
   {images.map((image) => (
     <div 
       key={image.id} 
@@ -43,6 +44,7 @@ export async function Images() {
           className="w-48 p-3 flex flex-col bg-white   hover:shadow-lg transition-shadow duration-300"
         > */}
       <div className="relative  aspect-square">
+        <Link href={`/img/${image.id}`}>
         <Image
           src={image.url} 
           alt={image.name ?? ""} 
@@ -51,6 +53,7 @@ export async function Images() {
           style={{objectFit: "contain"}}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        </Link>
       </div>
       <div className="p-3 border-t border-[#AF47D2]/10">
         <div className="text-sm font-medium text-white/90 truncate">
@@ -59,6 +62,7 @@ export async function Images() {
       </div>
     </div>
   ))}
+</div>
 </div>
 
 
